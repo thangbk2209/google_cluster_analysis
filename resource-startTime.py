@@ -48,10 +48,10 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 # df.printSchema()
-for i in range(len(startTimeArr))
+for i in range(len(startTimeArr)):
     sumCPUUsage = sql_context.sql("SELECT startTime/1000000,endTime/1000000,JobId,meanCPUUsage,CMU,AssignMem,unmap_page_cache_memory_ussage,page_cache_usage,mean_diskIO_time,mean_local_disk_space from dataFrame where startTime=%s"%(startTimeArr))
 
     schema_df = ["startTime","numberOfJob"]
-    sumCPUUsage.toPandas().to_csv('thangbk2209/resource-startTime/%s.csv'%(startTimeArr[i]/1000000), index=False, header=None)
+    sumCPUUsage.toPandas().to_csv('thangbk2209/resource-startTime/%s.csv'%(startTimeArr[i]/10000), index=False, header=None)
 
 sc.stop()
