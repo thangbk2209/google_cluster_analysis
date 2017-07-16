@@ -51,7 +51,7 @@ df.createOrReplaceTempView("dataFrame")
 for i in range(len(startTimeArr)):
     start = startTimeArr[i][0]
     print start
-    sumCPUUsage = sql_context.sql("SELECT startTime,endTime,JobId,meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage,mean_diskIO_time,mean_local_disk_space from dataFrame where startTime=%s"%(start))
+    sumCPUUsage = sql_context.sql("SELECT startTime/1000000 , endTime/1000000,JobId,meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage,mean_diskIO_time,mean_local_disk_space from dataFrame where startTime=%s"%(start))
 
     schema_df = ["startTime","numberOfJob"]
     sumCPUUsage.toPandas().to_csv('thangbk2209/resource-startTime/%s.csv'%(start), index=False, header=None)
