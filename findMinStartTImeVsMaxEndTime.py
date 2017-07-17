@@ -26,7 +26,8 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('mean_diskIO_time', FloatType(), True),
                          StructField('mean_local_disk_space', FloatType(), True)])
 
-for file_name in os.listdir(folder_path):
+for for num in range(175,270):
+    file_name = "part-00"+str(num).zfill(3)+"-of-00500.csv"
     df = (
         sql_context.read
         .format('com.databricks.spark.csv')
@@ -35,21 +36,20 @@ for file_name in os.listdir(folder_path):
     )
     df.createOrReplaceTempView("dataFrame")
    
-    minStartTimeDf = sql_context.sql("SELECT min(startTime) from dataFrame")
-    maxEndTimeDf = sql_context.sql("SELECT max(endTime) from dataFrame")
+    TimeDf = sql_context.sql("SELECT min(startTime),max(endTime) from dataFrame")
    
-    minStartTimeDf.toPandas().to_csv('thangbk2209/minMaxTopJobId/minStartTime%s'%(file_name), index=False, header=None)
-    maxEndTimeDf.toPandas().to_csv('thangbk2209/minMaxTopJobId/maxEndTime%s'%(file_name), index=False, header=None)
-    
-    schema_minStartdf = ["startTime"]
-    schema_maxEnddf = ["endTime"]
+    TimeDf.toPandas().to_csv('thangbk2209/minMaxTopJobId/Time%s'%(file_name), index=False, header=None)
+    schema_Timedf = ["startTime","endTime"]
    
-    minStartData = pd.read_csv('thangbk2209/minMaxTopJobId/minStartTime%s'%(file_name),names=schema_minStartdf)
-    maxEndData = pd.read_csv('thangbk2209/minMaxTopJobId/maxEndTime%s'%(file_name),names=schema_maxEnddf)
+    TimeData = pd.read_csv('thangbk2209/minMaxTopJobId/Time%s'%(file_name),names=schema_Timedf)
 
-    minStartTime=minStartData['startTime']
-    maxEndTime = maxEndData['endTime']
-    
+    minStartTime=TimeData['startTime']
+    maxEndTime = TimeData['endTime']
+    extraTime = 10
+    for i in range(minStartTime,maxEndTime, extraTime):
+        newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(i,i) )
+        # newData.withColumn('timeStamp',i)
+        newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s.csv'%(i), index=False, header=None)
     # df.printSchema()
     
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
