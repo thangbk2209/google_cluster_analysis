@@ -8,7 +8,7 @@ from matplotlib import pyplot
 import os
 sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
-startTimeDf = pd.read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/TopJobId-startTime.csv', header=None)
+startTimeDf = pd.read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/MidJobId/MidJobId-startTime-second.csv', header=None)
 # split dataset
 startTimeArr = startTimeDf.values
 
