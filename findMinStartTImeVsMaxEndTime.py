@@ -10,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
@@ -34,9 +34,23 @@ for file_name in os.listdir(folder_path):
         .load("%s%s"%(folder_path,file_name))
     )
     df.createOrReplaceTempView("dataFrame")
+   
+    minStartTimeDf = sql_context.sql("SELECT min(startTime) from dataFrame")
+    maxEndTimeDf = sql_context.sql("SELECT max(endTime) from dataFrame")
+   
+    minStartTimeDf.toPandas().to_csv('thangbk2209/minMaxTopJobId/minStartTime%s'%(file_name), index=False, header=None)
+    maxEndTimeDf.toPandas().to_csv('thangbk2209/minMaxTopJobId/maxEndTime%s'%(file_name), index=False, header=None)
+    
+    schema_minStartdf = ["startTime"]
+    schema_maxEnddf = ["endTime"]
+   
+    minStartData = pd.read_csv('thangbk2209/minMaxTopJobId/minStartTime%s'%(file_name),names=schema_minStartdf)
+    maxEndData = pd.read_csv('thangbk2209/minMaxTopJobId/maxEndTime%s'%(file_name),names=schema_maxEnddf)
+
+    minStartTime=minStartData['startTime']
+    maxEndTime = maxEndData['endTime']
+    
     # df.printSchema()
-    sumCPUUsage = sql_context.sql("SELECT startTime/1000000 as st, endTime/1000000 ,JobId,meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage,mean_diskIO_time,mean_local_disk_space from dataFrame where JobId = 6336594489 order by st ASC")
-    schema_df = ["startTime","numberOfJob"]
-    sumCPUUsage.toPandas().to_csv('thangbk2209/TopJobId/JobMaxTask%s'%(file_name), index=False, header=None)
+    
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
 sc.stop()
