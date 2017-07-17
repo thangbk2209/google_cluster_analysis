@@ -49,7 +49,7 @@ for num in range(175,270):
     for i in range(minStartTime,maxEndTime, extraTime):
         newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(i,i) )
         # newData.withColumn('timeStamp',i)
-        newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s.csv'%(i), index=False, header=None)
+        newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(num,i), index=False, header=None)
     # df.printSchema()
     
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
