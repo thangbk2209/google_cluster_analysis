@@ -46,9 +46,9 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 # df.printSchema()
-sumCPUUsage = sql_context.sql("SELECT distinct startTime/1000000 from dataFrame")
+sumCPUUsage = sql_context.sql("SELECT distinct startTime/1000000 from dataFrame order by startTime/1000000 ASC")
 
 schema_df = ["startTime","numberOfJob"]
-sumCPUUsage.toPandas().to_csv('thangbk2209/TopJobId/TopJobId-startTime-second.csv', index=False, header=None)
+sumCPUUsage.toPandas().to_csv('thangbk2209/MidJobId/MidJobId-startTime-second.csv', index=False, header=None)
 
 sc.stop()
