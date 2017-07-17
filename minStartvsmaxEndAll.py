@@ -45,7 +45,7 @@ for file_name in os.listdir(folder_path):
     )
     df.createOrReplaceTempView("dataFrame")
     # df.printSchema()
-    sumCPUUsage = sql_context.sql("SELECT min(startTime/1000000) max(endTime/1000000) from dataFrame")
+    sumCPUUsage = sql_context.sql("SELECT min(startTime/1000000), max(endTime/1000000) from dataFrame")
     schema_df = ["startTime","numberOfJob"]
     sumCPUUsage.toPandas().to_csv('thangbk2209/minStart-maxEndAll/%s'%(file_name), index=False, header=None)
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
