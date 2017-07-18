@@ -38,7 +38,7 @@ for file_name in os.listdir(folder_path):
     timePoint = int(timePointData[0])            # Lay ra nhan thoi gian
     if(part_number == 175):
         print part_number
-        if(timePoint > minMaxTimeArr[1][0] and timePoint < minMaxTimeArr[0][1]):
+        if(timePoint > int(minMaxTimeArr[1][0]) and timePoint < int(minMaxTimeArr[0][1])):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00176-of-00500.csv"
             df = (
                 sql_context.read
