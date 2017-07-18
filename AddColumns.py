@@ -1,0 +1,17 @@
+import pandas as pd
+from pandas import read_csv
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/newTenSecondsTopJobId/'
+
+timeSeriesData=[]
+for file_name in os.listdir(folder_path):
+	df = read_csv('%s%s'%(folder_path,file_name), header=None,index_col=False)
+	file_name_data = file_name.split('-')
+	timeStampData = file_name_data[1].split('.')
+	timeStamp = timeStampData[0]
+
+	data = df.values
+	data[0].append(timeStamp)
+	timeSeriesData.append(data[0])
+	print timeSeriesData
+newDf = pd.DataFrame(timeSeriesData)
+newDf.to_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/.csv')
