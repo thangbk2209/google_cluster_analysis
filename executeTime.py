@@ -34,7 +34,7 @@ for file_name in os.listdir(folder_path):
     timePointData = file_name[1].split('.')  
     timePoint = timePointData[0]            # Lay ra nhan thoi gian
     if(file_name_data[0] == 175):
-        if(timePoint > minMaxTimeArr[1][0] && timePoint < minMaxTimeArr[0][1]):
+        if(timePoint > minMaxTimeArr[1][0] and timePoint < minMaxTimeArr[0][1]):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00"+str(file_name_data[0]+1).zfill(3)+"-of-00500.csv"
             df = (
                 sql_context.read
@@ -46,7 +46,7 @@ for file_name in os.listdir(folder_path):
             newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timePoint,timePoint) )
             newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(file_name_data[0]+1,timePoint), index=False, header=None)
     elif(file_name_data[0] == 270):
-        if(timePoint > minMaxTimeArr[file_name_data[0]-175][0] && timePoint < minMaxTimeArr[file_name_data[0]-176][1]):
+        if(timePoint > minMaxTimeArr[file_name_data[0]-175][0] and timePoint < minMaxTimeArr[file_name_data[0]-176][1]):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00"+str(file_name_data[0]-1).zfill(3)+"-of-00500.csv"
             df = (
                 sql_context.read
@@ -58,7 +58,7 @@ for file_name in os.listdir(folder_path):
             newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timePoint,timePoint) )
             newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(file_name_data[0]-1,timePoint), index=False, header=None)
     else:
-        if(timePoint < minMaxTimeArr[file_name_data[0]-175][1] && timePoint > minMaxTimeArr[file_name_data[0]-174][0]):
+        if(timePoint < minMaxTimeArr[file_name_data[0]-175][1] and timePoint > minMaxTimeArr[file_name_data[0]-174][0]):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00"+str(file_name_data[0]+1).zfill(3)+"-of-00500.csv"
             df = (
                 sql_context.read
@@ -69,7 +69,7 @@ for file_name in os.listdir(folder_path):
             df.createOrReplaceTempView("dataFrame")
             newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timePoint,timePoint) )
             newData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(file_name_data[0]+1,timePoint), index=False, header=None)
-        if(timePoint > minMaxTimeArr[file_name_data[0]-175][0] && timePoint < minMaxTimeArr[file_name_data[0]-176][1]):
+        if(timePoint > minMaxTimeArr[file_name_data[0]-175][0] and timePoint < minMaxTimeArr[file_name_data[0]-176][1]):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00"+str(file_name_data[0]-1).zfill(3)+"-of-00500.csv"
             df = (
                 sql_context.read
