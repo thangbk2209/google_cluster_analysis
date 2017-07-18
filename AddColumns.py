@@ -11,6 +11,7 @@ for file_name in os.listdir(folder_path):
 	timeStamp = timeStampData[0]
 
 	data = df.values
+	print data[0]
 	newData = data[0]
 	newData.append(timeStamp)
 	timeSeriesData.append(newData)
