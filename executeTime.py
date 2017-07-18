@@ -11,7 +11,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/tenSecondsTopJobId/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
