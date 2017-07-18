@@ -32,6 +32,8 @@ minMaxTimeArr = minMaxTimeDf.values  # Lay ra cac gia tri min max time doi voi j
 print minMaxTimeArr
 for file_name in os.listdir(folder_path):
     file_name_data = file_name.split('-')  #Phan tu dau tien cua mang la vi tri part
+    part_number = int(file_name_data[0])
+    print part_number
     timePointData = file_name[1].split('.')  
     timePoint = timePointData[0]            # Lay ra nhan thoi gian
     if(int(file_name_data[0]) == 175):
