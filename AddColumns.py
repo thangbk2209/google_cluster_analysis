@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 from pandas import read_csv
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resourceTopJopId'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resourceTopJopId/'
 
 timeSeriesData=[]
 for file_name in os.listdir(folder_path):
