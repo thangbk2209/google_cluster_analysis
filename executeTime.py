@@ -34,7 +34,7 @@ for file_name in os.listdir(folder_path):
     file_name_data = file_name.split('-')  #Phan tu dau tien cua mang la vi tri part
     part_number = int(file_name_data[0])
     
-    timePointData = file_name[1].split('.')  
+    timePointData = file_name_data[1].split('.')  
     timePoint = int(timePointData[0])            # Lay ra nhan thoi gian
     if(part_number == 175):
         print part_number
