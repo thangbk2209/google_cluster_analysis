@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 from pandas import read_csv
 folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resourceTopJopId/'
@@ -11,9 +12,9 @@ for file_name in os.listdir(folder_path):
 	timeStamp = timeStampData[0]
 
 	data = df.values
-	print data
-	newData = data[0]
-	newData.append(timeStamp)
+	newData = np.append(data[0],timeStamp)
+	# newData = data[0]
+	# newData.append(timeStamp)
 	timeSeriesData.append(newData)
 	print timeSeriesData
 newDf = pd.DataFrame(timeSeriesData)
