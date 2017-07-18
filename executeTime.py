@@ -35,7 +35,7 @@ for file_name in os.listdir(folder_path):
     part_number = int(file_name_data[0])
     
     timePointData = file_name[1].split('.')  
-    timePoint = timePointData[0]            # Lay ra nhan thoi gian
+    timePoint = int(timePointData[0])            # Lay ra nhan thoi gian
     if(part_number == 175):
         print part_number
         if(timePoint > minMaxTimeArr[1][0] and timePoint < minMaxTimeArr[0][1]):
