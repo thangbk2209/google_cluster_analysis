@@ -49,7 +49,7 @@ for file_name in os.listdir(folder_path):
             newData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timePoint,timePoint) )
             newData.toPandas().to_csv('thangbk2209/newTenSecondsTopJobId/176-%s.csv'%(timePoint), index=False, header=None)
     elif(part_number == 270):
-        if(timePoint > minMaxTimeArr[int(95][0] and timePoint < minMaxTimeArr[94][1]):
+        if(timePoint > minMaxTimeArr[95][0] and timePoint < minMaxTimeArr[94][1]):
             part_name = "/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/JobMaxTaskpart-00"+str(int(file_name_data[0])-1).zfill(3)+"-of-00500.csv"
             df = (
                 sql_context.read
