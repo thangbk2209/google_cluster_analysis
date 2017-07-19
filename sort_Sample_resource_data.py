@@ -24,7 +24,7 @@ dataSchema = StructType([
                          StructField('page_cache_usage', FloatType(), True),
                          StructField('mean_diskIO_time', FloatType(), True),
                          StructField('mean_local_disk_space', FloatType(), True),
-                         StructField('timeStamp', StringType(), True)])
+                         StructField('time_stamp', StringType(), True)])
 
 file_name = "sample_resource_usage_TopJobId.csv"
 df = (
@@ -35,7 +35,7 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT 'JobId', 'meanCPUUsage' , 'CMU', 'AssignMem', 'unmapped_cache_usage', 'page_cache_usage' , 'mean_local_disk_space' , 'timeStamp'from dataFrame order by timeStamp ASC")
+DataDf = sql_context.sql("SELECT JobId, meanCPUUsage , CMU, AssignMem, unmapped_cache_usage, page_cache_usage , mean_local_disk_space , time_stamp from dataFrame order by timeStamp ASC")
 print "DataDf.count()= "
 print DataDf.count()
 DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/offical_data_resource_TopJobId.csv', index=False, header=None)
