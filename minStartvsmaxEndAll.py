@@ -1,4 +1,4 @@
-
+# Truy xuat ra min start time va max end time cuar tat ca cac part trong bo du lieu google cluster trace
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext

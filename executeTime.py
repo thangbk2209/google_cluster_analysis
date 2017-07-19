@@ -1,4 +1,8 @@
-
+#  Xu li thoi gian chong lan giua cac part
+# y tuong: Lay ra gia tri min start time va max end time cua job id trong tung part
+# Kiem tra tat ca cac file da truy xuat ra tu file exTractResourceTopJobId.py
+# cat ra cac gia tri thoi gian, kiem tra xem no co nam trong khoang chong lan khong
+#  roi sau do tien hanh truy van bo sung du lieu
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pandas import read_csv

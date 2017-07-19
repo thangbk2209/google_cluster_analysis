@@ -1,4 +1,4 @@
-
+# Truy xuat cac du lieu ve resource usage cua job id = 6336594489(Job id co so luong task lon nhat) tu cac part trong du lieu google cluster trace
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext

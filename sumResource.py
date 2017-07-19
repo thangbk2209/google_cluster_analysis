@@ -1,4 +1,4 @@
-
+# tinh resoure usage cua tung timeStamp - cong lai tong resouce usage trong tung file - moi file chua mot diem thoi gian
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext

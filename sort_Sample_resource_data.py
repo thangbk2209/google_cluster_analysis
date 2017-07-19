@@ -1,4 +1,5 @@
-
+# Tinh tong resource tai cac diem thoi gian chong lan. Cung voi do, sapws xep laij
+# resource theo thoi gian tang dan
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext

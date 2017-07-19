@@ -1,3 +1,4 @@
+# Tien hanh them cot nhan thoi gian, cung voi do noi tat ca cac diem thoi gian lai va dua ra file csv
 import pandas as pd
 import numpy as np
 import os
