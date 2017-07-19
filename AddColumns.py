@@ -6,7 +6,7 @@ folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resou
 
 timeSeriesData=[]
 for file_name in os.listdir(folder_path):
-	print file_name
+	# print file_name
 	file_name_data = file_name.split('-')
 	timeStampData = file_name_data[1].split('.')
 	timeStamp = timeStampData[0]
@@ -18,10 +18,11 @@ for file_name in os.listdir(folder_path):
 		# newData.append(timeStamp)
 		timeSeriesData.append(newData)
 		# print timeSeriesData
-		print len(timeSeriesData)
+		# print len(timeSeriesData)
 	except pd.io.common.EmptyDataError:
 		oldData=[6336594489, 0, 0, 0, 0, 0, 0, 0]
 		newData = np.append(oldData,timeStamp)
 		timeSeriesData.append(newData)
+		
 newDf = pd.DataFrame(timeSeriesData)
 newDf.to_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/sample_resource_usage_TopJobId.csv')
