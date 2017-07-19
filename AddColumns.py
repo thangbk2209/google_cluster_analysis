@@ -19,7 +19,7 @@ for file_name in os.listdir(folder_path):
 		timeSeriesData.append(newData)
 		# print timeSeriesData
 		print len(timeSeriesData)
-	except EmptyDataError:
+	except pd.io.common.EmptyDataError:
 		oldData=[6336594489, 0, 0, 0, 0, 0, 0, 0]
 		newData = np.append(oldData,timeStamp)
 		timeSeriesData.append(newData)

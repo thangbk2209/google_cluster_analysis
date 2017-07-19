@@ -8,6 +8,6 @@ for file_name in os.listdir(folder_path):
 	print file_name
 	try:
 		df = read_csv('%s%s'%(folder_path,file_name), header=None,index_col=False)
-	except EmptyDataError:
+	except pd.io.common.EmptyDataError:
 		name.append(file_name)
 print name
