@@ -33,7 +33,7 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT  sum(meanCPUUsage) , sum(CMU), sum(AssignMem), sum(unmapped_cache_usage), sum(page_cache_usage) , sum(mean_local_disk_space) , time_stamp as ts from dataFrame group by ts order by ts ASC")
+DataDf = sql_context.sql("SELECT  sum(meanCPUUsage) , sum(CMU), sum(AssignMem), sum(unmapped_cache_usage), sum(page_cache_usage) , sum(mean_local_disk_space) , time_stamp as ts from dataFrame group by ts")
 print "DataDf.count()= "
 print DataDf.count()
 DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/offical_data_resource_TopJobId.csv', index=False, header=None)
