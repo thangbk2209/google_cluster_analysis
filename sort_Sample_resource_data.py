@@ -13,7 +13,7 @@ sql_context = SQLContext(sc)
 folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/'
 
 dataSchema = StructType([
-                         StructField('JobId', LongType(), True),
+                         # StructField('JobId', LongType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
                          # canonical memory usage
                          StructField('CMU', FloatType(), True),
