@@ -10,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/'
 
 dataSchema = StructType([
                          StructField('JobId', LongType(), True),
@@ -22,7 +22,6 @@ dataSchema = StructType([
                          # unmapped page cache memory usage
                          StructField('unmapped_cache_usage', FloatType(), True),
                          StructField('page_cache_usage', FloatType(), True),
-                         StructField('mean_diskIO_time', FloatType(), True),
                          StructField('mean_local_disk_space', FloatType(), True),
                          StructField('time_stamp', StringType(), True)])
 
