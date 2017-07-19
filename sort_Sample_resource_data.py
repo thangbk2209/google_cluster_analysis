@@ -36,7 +36,7 @@ df = (
 df.createOrReplaceTempView("dataFrame")
 
 DataDf = sql_context.sql("SELECT * from dataFrame order by timeStamp ASC")
-print "TimeDf.count()= "
-print TimeDf.count()
+print "DataDf.count()= "
+print DataDf.count()
 DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/offical_data_resource_TopJobId.csv', index=False, header=None)
 sc.stop()
