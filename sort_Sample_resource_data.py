@@ -10,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/'
 
 dataSchema = StructType([
                          StructField('JobId', LongType(), True),
@@ -25,7 +25,7 @@ dataSchema = StructType([
                          StructField('mean_local_disk_space', FloatType(), True),
                          StructField('time_stamp', StringType(), True)])
 
-file_name = "sample_resource_usage_TopJobId.csv"
+file_name = "my_sample_resource_usage_TopJobId.csv"
 df = (
     sql_context.read
     .format('com.databricks.spark.csv')
