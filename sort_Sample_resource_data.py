@@ -35,7 +35,7 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT * from dataFrame order by timeStamp ASC")
+DataDf = sql_context.sql("SELECT 'JobId', 'meanCPUUsage' , 'CMU', 'AssignMem', 'unmapped_cache_usage', 'page_cache_usage' , 'mean_local_disk_space' , 'timeStamp'from dataFrame order by timeStamp ASC")
 print "DataDf.count()= "
 print DataDf.count()
 DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/offical_data_resource_TopJobId.csv', index=False, header=None)
