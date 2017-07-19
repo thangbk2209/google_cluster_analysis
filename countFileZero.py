@@ -6,5 +6,8 @@ folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resou
 name=[]
 for file_name in os.listdir(folder_path):
 	print file_name
-	df = read_csv('%s%s'%(folder_path,file_name), header=None,index_col=False)
-	
+	try:
+		df = read_csv('%s%s'%(folder_path,file_name), header=None,index_col=False)
+	except EmptyDataError:
+		name.append(file_name)
+print name
