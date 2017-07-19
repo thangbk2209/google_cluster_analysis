@@ -24,7 +24,7 @@ dataSchema = StructType([
                          StructField('page_cache_usage', FloatType(), True),
                          StructField('mean_local_disk_space', FloatType(), True),
                          StructField('time_stamp', LongType(), True)])
-file_name = "my_sample_resource_usage_TopJobId.csv"
+file_name = "offical_data_resource_TopJobId.csv"
 df = (
     sql_context.read
     .format('com.databricks.spark.csv')
@@ -33,8 +33,8 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT  sum(meanCPUUsage) , sum(CMU), sum(AssignMem), sum(unmapped_cache_usage), sum(page_cache_usage) , sum(mean_local_disk_space) , time_stamp from dataFrame group by time_stamp")
+DataDf = sql_context.sql("SELECT  * from dataFrame order by time_stamp ASC")
 print "DataDf.count()= "
 print DataDf.count()
-DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/offical_data_resource_TopJobId.csv', index=False, header=None)
+DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/my_offical_data_resource_TopJobId.csv', index=False, header=None)
 sc.stop()
