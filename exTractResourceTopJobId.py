@@ -30,7 +30,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('mean_diskIO_time', FloatType(), True),
                          StructField('mean_local_disk_space', FloatType(), True)])
 
-for num in range(270,271):
+for num in range(175,271):
     file_name = "JobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv"
     df = (
         sql_context.read
