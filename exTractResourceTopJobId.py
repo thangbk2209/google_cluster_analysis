@@ -64,9 +64,10 @@ for partNumber in range(0,500):
             .load("%s%s"%(folder_path,file_name))
         )
         df.createOrReplaceTempView("dataFrame")
-        if numberOfPart != len(TimeData)-1:
+        numberOfPart ++ 
+        if numberOfPart != len(TimeData):
             next_file_name = "JobMaxTaskpart-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
-            timeCheck = TimeData[numberOfPart+1][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
+            timeCheck = TimeData[numberOfPart][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
                                         # voi thoi diem ket thuc part hien tai co bi chong lan khong
             if timeCheck <= timeEndPart:
                 nextDf = (
@@ -103,5 +104,5 @@ for partNumber in range(0,500):
             for timeStamp in range(timeNow,timeEnd, extraTime):
                 resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
                 resourceData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
-        numberOfPart++   
+          
 sc.stop()
