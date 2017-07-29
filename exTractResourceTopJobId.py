@@ -41,7 +41,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
 
 schema_Timedf = ["startTime","endTime"]    
-TimeData = pd.read_csv('thangbk2209/results/minMaxTimePart.csv',names=schema_Timedf).values
+TimeData = pd.read_csv('thangbk2209/plotTimeSeries/results/minMaxTimePart.csv',names=schema_Timedf).values
 print TimeData
 timeStart = TimeData[0][0]
 timeNow = timeStart
