@@ -17,51 +17,29 @@ unmap_cache = df['unmap_page_cache_memory_ussage'].values
 page_cache = df['page_cache_usage'].values
 mean_disk = df['mean_local_disk_space'].values
 
-fig = plt.figure(figsize=(10,20))
+fig = plt.figure(figsize=(10,30))
 # print AssignMem
 ax0 = plt.subplot2grid((5,1),(0,0))
-ax0.scatter(CMU,AssignMem )
-
-ax1 = plt.subplot2grid((5,1),(1,0))
-ax1.scatter(CMU,meanCPUUsage )
-
-ax2 = plt.subplot2grid((5,1),(2,0))
-ax2.scatter(CMU,unmap_cache)
-
-ax3 = plt.subplot2grid((5,1),(3,0))
-ax3.scatter(CMU,page_cache)
-
-ax4 = plt.subplot2grid((5,1),(4,0))
-ax4.scatter(CMU,mean_disk)
-plt.ylim((0,2))
-# ax5 = plt.subplot2grid((5,1),(5,0))
-# ax5.scatter(CMU,AssignMem )
-# linear = LR()
-# linear.fit(CMU,AssignMem)
-# print linear.fit_intercept
-ax0.set(title="Linear Corelation", xlabel="CMU", ylabel="AssignMem")
+ax0.scatter(unmap_cache,page_cache)
+ax0.set(title="Linear Corelation", xlabel="unmap_page_cache_memory_ussage", ylabel="page_cache_usage")
 # plt.show()
 # print corelationMatrix
 axes = plt.gca()
 print 'axes'
 print axes.get_xlim()[0],axes.get_xlim()[1]
-m, b = np.polyfit(CMU, AssignMem, 1)
+m, b = np.polyfit(unmap_cache,page_cache, 1)
 
 print m
 print b
-
+# plt.text('m,b:%s%s'%(m,b))
+ax0.text(axes.get_xlim()[1]/2, 0, 'm:%s ,b:%s'%(m,b), style='italic',
+        bbox={'facecolor':'red', 'alpha':0.5, 'pad':10})
 X_plot = np.linspace(axes.get_xlim()[0],axes.get_xlim()[1],100)
 
 print X_plot
 ax0.plot(X_plot, m*X_plot + b,color='r')
 
-p,q = np.polyfit(CMU, mean_disk, 1)
-print 'p,q: '
-print p
-print q
-Q_plot = np.linspace(axes.get_xlim()[0],axes.get_xlim()[1],100)
-ax4.plot(Q_plot, p*Q_plot + q,color='r')
 
-pp = PdfPages('results/CMU-AssignMem.pdf')
+pp = PdfPages('results/unmap_page_cache_memory_ussage-page_cache_usage.pdf')
 pp.savefig()
 pp.close()

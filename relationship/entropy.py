@@ -73,55 +73,37 @@ for i in range(48308):
 	page_cache.append(round(df['page_cache_usage'].values[i],2))
 	mean_disk.append(round(df['mean_local_disk_space'].values[i],2))
 
-print symmetrical_uncertainly(meanCPUUsage,CMU)
-print symmetrical_uncertainly(meanCPUUsage,AssignMem)
-print symmetrical_uncertainly(meanCPUUsage,unmap_cache)
-# print len(meanCPUUsage)
-# print meanCPUUsage
-# print meanCPUUsage.count(meanCPUUsage[0])
-# print len(AssignMem)
-# print len(CMU)
-# print len(unmap_cache)
-# print len(page_cache)
-# print len(mean_disk)
-# newDf=[]
-# # print'lol'
-# # print entro(meanCPUUsage)
-# # print entro(CMU)
-# # print entro(AssignMem)
-# # print entroXY(CMU,mean_disk)
-# newDf.append(meanCPUUsage)
-# newDf.append(CMU)
-# newDf.append(AssignMem)
-# newDf.append(unmap_cache)
-# newDf.append(page_cache)
-# newDf.append(mean_disk)
-# for i in range(len(newDf)):
-# 	for j in range(i+1,len(newDf)):
-# 		print colnames[i]+ '   '+ colnames[j] 
-# 		print symmetrical_uncertainly(df[colnames[i]].values,df[colnames[j]].values)
-		# print entropy(newDf[i],newDf[j]).sum()
-# print entropy(meanCPUUsage, AssignMem)
-# n, bins, patches = plt.hist(newDf[0],newDf[1])
+f=open('results/test.txt', 'wa')
+f.write('meanCPUUsage,CMU: '+str(symmetrical_uncertainly(meanCPUUsage,CMU)))
+f.write('meanCPUUsage,AssignMem: '+str(symmetrical_uncertainly(meanCPUUsage,AssignMem)))
+f.write('meanCPUUsage,unmap_cache: '+str(symmetrical_uncertainly(meanCPUUsage,unmap_cache)))
+f.write('meanCPUUsage,page_cache: '+str(symmetrical_uncertainly(meanCPUUsage,page_cache)))
+f.write('meanCPUUsage,mean_disk: '+str(symmetrical_uncertainly(meanCPUUsage,mean_disk)))
+f.write('CMU,meanCPUUsage: '+str(symmetrical_uncertainly(CMU,meanCPUUsage)))
+f.write('CMU,AssignMem: '+str(symmetrical_uncertainly(CMU,AssignMem)))
+f.write('CMU,unmap_cache: '+str(symmetrical_uncertainly(CMU,unmap_cache)))
+f.write('CMU,unmap_cache: '+str(symmetrical_uncertainly(CMU,page_cache)))
+f.write('CMU,mean_disk: '+str(symmetrical_uncertainly(CMU,mean_disk)))
+f.write('AssignMem,meanCPUUsage: '+str(symmetrical_uncertainly(AssignMem,meanCPUUsage)))
+f.write('AssignMem,CMU: '+str(symmetrical_uncertainly(AssignMem,CMU)))
+f.write('AssignMem,unmap_cache: '+str(symmetrical_uncertainly(AssignMem,unmap_cache)))
+f.write('AssignMem,page_cache: '+str(symmetrical_uncertainly(AssignMem,page_cache)))
+f.write('AssignMem,mean_disk: '+str(symmetrical_uncertainly(AssignMem,mean_disk)))
+f.write('unmap_cache,meanCPUUsage: '+str(symmetrical_uncertainly(unmap_cache,meanCPUUsage)))
+f.write('unmap_cache,CMU: '+str(symmetrical_uncertainly(unmap_cache,CMU)))
+f.write('unmap_cache,AssignMem: '+str(symmetrical_uncertainly(unmap_cache,AssignMem)))
+f.write('unmap_cache,page_cache: '+str(symmetrical_uncertainly(unmap_cache,page_cache)))
+f.write('unmap_cache,mean_disk: '+str(symmetrical_uncertainly(unmap_cache,mean_disk)))
+f.write('page_cache,meanCPUUsage: '+str(symmetrical_uncertainly(page_cache,meanCPUUsage)))
+f.write('page_cache,CMU: '+str(symmetrical_uncertainly(page_cache,CMU)))
+f.write('page_cache,AssignMem: '+str(symmetrical_uncertainly(page_cache,AssignMem)))
+f.write('page_cache,unmap_cache: '+str(symmetrical_uncertainly(page_cache,unmap_cache)))
+f.write('page_cache,mean_disk: '+str(symmetrical_uncertainly(page_cache,mean_disk)))
+f.write('mean_disk,meanCPUUsage: '+str(symmetrical_uncertainly(mean_disk,meanCPUUsage)))
+f.write('mean_disk,CMU: '+str(symmetrical_uncertainly(mean_disk,CMU)))
+f.write('mean_disk,AssignMem: '+str(symmetrical_uncertainly(mean_disk,AssignMem)))
+f.write('mean_disk,unmap_cache: '+str(symmetrical_uncertainly(mean_disk,unmap_cache)))
+f.write('mean_disk,page_cache: '+str(symmetrical_uncertainly(mean_disk,page_cache)))
 
-# print n,bins,patches
-
-# print df[colnames[0]].values
-# print len(newDf)
-# test = entropy(CMU)
-# test1 = entropy(meanCPUUsage)
-# test2 = entropy(AssignMem)
-# a = entropy(CMU,mean_disk )
-# b = entropy(meanCPUUsage,mean_disk)
-# c = entropy(AssignMem,mean_disk)
-# d = entropy(meanCPUUsage,AssignMem)
-# print test
-# print test1
-# print test2
-# print a
-# print b
-# print c
-# print d
-# print test - a
-# print test1 - b
-# print test2 - c
+# print symmetrical_uncertainly(meanCPUUsage,AssignMem)
+# print symmetrical_uncertainly(meanCPUUsage,unmap_cache)
