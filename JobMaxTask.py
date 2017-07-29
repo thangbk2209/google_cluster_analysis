@@ -1,4 +1,5 @@
-# Truy xuat cac du lieu ve resource usage cua job id = 6336594489(Job id co so luong task lon nhat) tu cac part trong du lieu google cluster trace
+# Truy xuat cac du lieu ve resource usage cua job id = 6336594489(Job id co so luong task lon nhat) 
+# tu cac part trong du lieu google cluster trace
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext
@@ -45,7 +46,7 @@ for file_name in os.listdir(folder_path):
     )
     df.createOrReplaceTempView("dataFrame")
     # df.printSchema()
-    sumCPUUsage = sql_context.sql("SELECT startTime/1000000 as st, endTime/1000000 ,JobId,meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage,mean_diskIO_time,mean_local_disk_space from dataFrame where JobId = 6336594489 order by st ASC")
+    sumCPUUsage = sql_context.sql("SELECT startTime/1000000 as st, endTime/1000000, JobId, taskIndex, machineId, meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage, max_mem_usage,mean_diskIO_time,mean_local_disk_space,max_cpu_usage,max_disk_io_time, cpi, mai, sampling_portion, agg_type, sampled_cpu_usage from dataFrame where JobId = 6336594489 order by st ASC")
     schema_df = ["startTime","numberOfJob"]
     sumCPUUsage.toPandas().to_csv('thangbk2209/TopJobId/JobMaxTask%s'%(file_name), index=False, header=None)
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
