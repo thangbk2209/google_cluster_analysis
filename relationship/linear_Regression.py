@@ -28,52 +28,40 @@ page_cache = df['page_cache_usage'].values
 mean_disk = df['mean_local_disk_space'].values
 # print len(meanCPUUsage)
 # print len(unmap_cache)
-fig = plt.figure(figsize=(10,30))
+fig = plt.figure(figsize=(10,20))
 # print AssignMem
 ax0 = plt.subplot2grid((1,1),(0,0))
 
 train_size = int(len(meanCPUUsage) * 0.85)
-# trainCPUUsage, testCPUUsage = meanCPUUsage[1:train_size], meanCPUUsage[train_size:]
-# trainUnmap_cache, testUnmap_cache = unmap_cache[1:train_size], unmap_cache[train_size:]
-trainCPUUsage = []
-testCPUUsage = []
-trainUnmap_cache = []
-testUnmap_cache = []
-for i in range(len(meanCPUUsage)):
-	if i <= train_size:
-		trainCPUUsage.append(meanCPUUsage[i])
-		trainUnmap_cache.append(unmap_cache[i])
-	else:
-		testCPUUsage.append(meanCPUUsage[i])
-		testUnmap_cache.append(unmap_cache[i])
-# print train_size
+trainX, testX = unmap_cache[1:train_size],unmap_cache[train_size:]
+trainY, testY = page_cache[1:train_size], page_cache[train_size:]
+
 regr = linear_model.LinearRegression()
-regr.fit(np.transpose(np.matrix(trainCPUUsage)), np.transpose(np.matrix(trainUnmap_cache)))
-# regr.fit(trainCPUUsage,trainUnmap_cache)
-print('Coefficients: \n', regr.coef_)
-print regr.get_params()
-print testCPUUsage
-predicts =  regr.predict(np.transpose(np.matrix(testCPUUsage)))
+regr.fit(np.transpose(np.matrix(trainX)), np.transpose(np.matrix(trainY)))
+
+# print('Coefficients: \n', regr.coef_)
+# print regr.get_params()
+# print testCPUUsage
+predicts =  regr.predict(np.transpose(np.matrix(testX)))
 
 print 'predicts: '
 print predicts
 predictsArr = []
 for i in range(len(predicts)):
 	predictsArr.append(predicts[i][0])
-mean_square_error = mean_squared_error(testCPUUsage, predictsArr)
+mean_square_error = mean_squared_error(testY, predictsArr)
 print mean_square_error
 print len(predictsArr)
 print predictsArr[0],predictsArr[1]
-print testUnmap_cache[0],testUnmap_cache[1]
-ax0.scatter(trainCPUUsage,trainUnmap_cache, color="black")
-ax0.scatter(testCPUUsage, testUnmap_cache,  color='black')
-ax0.plot(testCPUUsage ,predictsArr, color='blue', linewidth=3)
+# print testUnmap_cache[0],testUnmap_cache[1]
+ax0.scatter(trainX,trainY, color="black")
+ax0.scatter(testX, testY,  color='black')
+ax0.plot(testX ,predictsArr, color='blue', linewidth=3)
+ax0.set(title="Linear Corelation", xlabel="unmap_cache", ylabel="page_cache")
 ax0.text(40, 0, 'mean_squared_error:%s'%(mean_square_error), style='italic',
         bbox={'facecolor':'red', 'alpha':0.5, 'pad':10})
-# plt.xticks(())
 
-# plt.yticks(())
-pp = PdfPages('results/testCPUUsage-unmapCache.png')
+pp = PdfPages('results/predictUnmap_cache-page_cache.pdf')
 pp.savefig()
+plt.savefig('results/predictUnmap_cache-page_cache.png')
 pp.close()
-# plt.show()
