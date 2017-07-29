@@ -64,7 +64,7 @@ for partNumber in range(0,500):
             .load("%s%s"%(folder_path,file_name))
         )
         df.createOrReplaceTempView("dataFrame")
-        numberOfPart ++ 
+        numberOfPart +=1
         if numberOfPart != len(TimeData):
             next_file_name = "JobMaxTaskpart-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
             timeCheck = TimeData[numberOfPart][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
