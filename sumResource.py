@@ -48,6 +48,6 @@ for file_name in os.listdir(folder_path):
     df.createOrReplaceTempView("dataFrame")
    
     reSourceDf = sql_context.sql("SELECT JobId,count(taskIndex),count(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by JobId")
-   
+    
     reSourceDf.toPandas().to_csv('thangbk2209/resourceTopJopId/%s'%(file_name), index=False, header=None)
 sc.stop()

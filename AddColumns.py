@@ -28,4 +28,5 @@ for file_name in os.listdir(folder_path):
 		timeSeriesData.append(newData)
 		
 newDf = pd.DataFrame(timeSeriesData)
-newDf.to_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/all_sample_resource_usage_TopJobId.csv')
+df1 = newDf.replace(np.nan, 0, regex=True)
+df1.to_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/all_sample_resource_usage_TopJobId.csv', index=False, header=None)
