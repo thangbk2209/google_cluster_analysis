@@ -11,7 +11,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/'
 
 dataSchema = StructType([
                          StructField('JobId', LongType(), True),
@@ -37,7 +37,7 @@ dataSchema = StructType([
                          StructField('sampled_cpu_usage', FloatType(), True),
                          StructField('time_stamp', LongType(), True)])
 
-file_name = "offical_data_resource_TopJobId.csv"
+file_name = "extractedData.csv "
 df = (
     sql_context.read
     .format('com.databricks.spark.csv')
