@@ -10,13 +10,13 @@ import os
 sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
-# folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/'
+folder_path ='/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/'
+# folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/'
 
 dataSchema = StructType([
                          StructField('JobId', LongType(), True),
-                         StructField('taskIndex', LongType(), True),
-                         StructField('machineId', LongType(), True),
+                         StructField('taskIndex', FloatType(), True),
+                         StructField('machineId', FloatType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
                          # canonical memory usage
                          StructField('CMU', FloatType(), True),
@@ -35,7 +35,7 @@ dataSchema = StructType([
                          StructField('sampling_portion', FloatType(), True),
                          StructField('agg_type', FloatType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True),
-                         StructField('time_stamp', LongType(), True)])
+                         StructField('time_stamp', FloatType(), True)])
 
 file_name = "extractedData.csv"
 df = (
@@ -46,8 +46,8 @@ df = (
 )
 df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT time_stamp,sum(taskIndex),sum(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by time_stamp")
+DataDf = sql_context.sql("SELECT time_stamp,sum(taskIndex),sum(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by time_stamp order by time_stamp ASC")
 print "DataDf.count()= "
 print DataDf.count()
-DataDf.toPandas().to_csv('thangbk2209/plotTimeSeries/data_resource_JobId_6336594489.csv', index=False, header=None)
+DataDf.toPandas().to_csv('google_cluster_analysis/results/data_resource_JobId_6336594489.csv', index=False, header=None)
 sc.stop()
