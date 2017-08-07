@@ -8,7 +8,7 @@ from pandas.plotting import lag_plot
 from matplotlib.backends.backend_pdf import PdfPages
 from sklearn.linear_model import LinearRegression as LR
 import numpy as np
-from scipy.stats import entropy
+
 
 from collections import Counter
 # Counter(array1.most_common(1))
@@ -67,7 +67,8 @@ def symmetrical_uncertainly(X,Y):
 # colnames=['meanCPUUsage' ,'CMU' ,'AssignMem' ,'unmap_page_cache_memory_ussage' ,'page_cache_usage' ,'mean_local_disk_space', 'timeStamp']
 # df = read_csv('/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/my_offical_data_resource_TopJobId.csv', header=None, index_col=False, names=colnames)
 colnames=['time_stamp','numberOfTaskIndex','numberOfMachineId','meanCPUUsage','CMU','AssignMem','unmapped_cache_usage','page_cache_usage', 'max_mem_usage','mean_diskIO_time','mean_local_disk_space','max_cpu_usage', 'max_disk_io_time', 'cpi', 'mai','sampled_cpu_usage']
-df = read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
+# df = read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
+df = read_csv('/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
 
 numberOfTaskIndex = df['numberOfTaskIndex'].values
 
@@ -120,16 +121,23 @@ test=[]
 # 	test.append(meanCPUUsage.count(meanCPUUsage[i]))
 # print test
 su=[]
-for j in range(len(newDf)-1):
-	print 'j ',j
-	suj=[]
-	for k in range(j+1,len(newDf),1):
-		print 'k ',k
-		suj.append(symmetrical_uncertainly(newDf[j],newDf[k]))
-	print suj
-	su.append(suj)
-print su
-suDf = pd.DataFrame(su)
-suDf.to_csv("symmetrical_uncertainly.csv")
-# np.savetxt("foo.csv", su, delimiter=",")
+entropyGGTrace = []
+numberOfEntropy = 0
+print symmetrical_uncertainly(meanCPUUsage,CMU)
+# for df in newDf:
+# 	numberOfEntropy +=1
+# 	print numberOfEntropy
+# 	entropyGGTrace.append(entro(df))
+# for j in range(len(newDf)-1):
+# 	print 'su',j
+# 	suj=[]
+# 	for k in range(j+1,len(newDf),1):
+# 		entropyXY = entroXY(newDf[j],newDf[k])
+# 		ifGain = entropyGGTrace[j] - entropyXY
+# 		suGGTrace = 1.0*ifGain/(entropyGGTrace[j]+ entropyGGTrace[k])
+# 		# suj.append(symmetrical_uncertainly(newDf[j],newDf[k]))
+# 		suj.append(suGGTrace)
+# 	su.append(suj)
+# print su
+# np.savetxt("symmetrical_uncertainly.csv", su, delimiter=",")
 
