@@ -51,6 +51,8 @@ for i in range(8640):
 	cpi.append(round(df['cpi'].values[i],2))
 	mai.append(round(df['mai'].values[i],2))
 	sampled_cpu_usage.append(round(df['sampled_cpu_usage'].values[i],2))
+print len(time_stamp)
+print len(meanCPUUsage)
 newDf = []
 # newDf.append(time_stamp)
 newDf.append(numberOfTaskIndex)
