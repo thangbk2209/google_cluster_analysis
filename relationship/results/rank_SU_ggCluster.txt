@@ -1,0 +1,17 @@
+numberOfTaskIndex-numberOfMachineId:1.0
+max_cpu_usage-cpi:0.9675577716
+cpi-mai:0.9066842514
+cpi-sampled_cpu_usage:0.8897457941
+meanCPUUsage-cpi:0.8895309969
+max_cpu_usage-mai:0.8698571741
+max_cpu_usage-sampled_cpu_usage:0.8518374551
+meanCPUUsage-max_cpu_usage:0.8516124629
+AssignMem-cpi:0.8502431864
+CMU-cpi:0.8449848242
+max_mem_usage-cpi:0.8425927786
+page_cache_usage-cpi:0.8317264436
+unmapped_cache_usage-cpi:0.8312069156
+mean_diskIO_time-max_disk_io_time:0.8142565976
+AssignMem-max_cpu_usage:0.8095530421
+CMU-max_cpu_usage:0.8039266151
+max_mem_usage-max_cpu_usage:0.801396658
