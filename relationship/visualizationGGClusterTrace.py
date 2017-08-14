@@ -73,14 +73,13 @@ test=[]
 # 	test.append(meanCPUUsage.count(meanCPUUsage[i]))
 # print test
 su=[]
-# for j in range(len(newDf)):
-fig = plt.figure(figsize=(10,20))
-# print AssignMem
-ax0 = plt.subplot2grid((1,1),(0,0))
-ax0.scatter(time_stamp,numberOfMachineId)
-ax0.set(title="Visualization", xlabel=colnames[0], ylabel=colnames[1])
-plt.savefig('results/%s.png'%(colnames[1]))
-# pp.close()
+for j in range(len(newDf)):
+	fig = plt.figure(figsize=(10,20))
+	# print AssignMem
+	ax0 = plt.subplot2grid((1,1),(0,0))
+	ax0.scatter(time_stamp,newDf[j])
+	ax0.set(title="Visualization", xlabel=colnames[0], ylabel=colnames[j+1])
+	plt.savefig('results/%s.png'%(colnames[j+1]))
 
 
 
