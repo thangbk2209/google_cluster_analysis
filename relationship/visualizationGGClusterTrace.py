@@ -80,7 +80,7 @@ ax0 = plt.subplot2grid((1,1),(0,0))
 ax0.scatter(time_stamp,numberOfMachineId)
 ax0.set(title="Visualization", xlabel=colnames[0], ylabel=colnames[1])
 plt.savefig('results/%s.png'%(colnames[1]))
-pp.close()
+# pp.close()
 
 
 
