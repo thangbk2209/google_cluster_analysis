@@ -19,9 +19,7 @@ from collections import Counter
 colnames=['time_stamp','numberOfTaskIndex','numberOfMachineId','meanCPUUsage','CMU','AssignMem','unmapped_cache_usage','page_cache_usage', 'max_mem_usage','mean_diskIO_time','mean_local_disk_space','max_cpu_usage', 'max_disk_io_time', 'cpi', 'mai','sampled_cpu_usage']
 df = read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
 time_stamp=[]
-numberOfTaskIndex = df['numberOfTaskIndex'].values
 
-numberOfMachineId = df['numberOfMachineId'].values
 meanCPUUsage = []
 CMU = []
 AssignMem = []
@@ -38,6 +36,9 @@ sampled_cpu_usage=[]
 
 for i in range(8640):
 	time_stamp.append(df['time_stamp'].values[i])
+	numberOfTaskIndex.append(df['numberOfTaskIndex'].values[i]) 
+
+	numberOfMachineId.append(df['numberOfMachineId'].values[i]) 
 	meanCPUUsage.append(round(df['meanCPUUsage'].values[i],2))
 	CMU.append(round(df['CMU'].values[i],2))
 	AssignMem.append(round(df['AssignMem'].values[i],2))
