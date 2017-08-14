@@ -35,9 +35,9 @@ max_disk_io_time = []
 cpi = []
 mai = []
 sampled_cpu_usage=[]
-time_stamp.append(df['time_stamp'])
+
 for i in range(8640):
-	
+	time_stamp.append(df['time_stamp'].values[i])
 	meanCPUUsage.append(round(df['meanCPUUsage'].values[i],2))
 	CMU.append(round(df['CMU'].values[i],2))
 	AssignMem.append(round(df['AssignMem'].values[i],2))
