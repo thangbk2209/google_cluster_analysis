@@ -68,7 +68,7 @@ def symmetrical_uncertainly(X,Y):
 # colnames=['meanCPUUsage' ,'CMU' ,'AssignMem' ,'unmap_page_cache_memory_ussage' ,'page_cache_usage' ,'mean_local_disk_space', 'timeStamp']
 # df = read_csv('/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/my_offical_data_resource_TopJobId.csv', header=None, index_col=False, names=colnames)
 colnames=['time_stamp','numberOfTaskIndex','numberOfMachineId','meanCPUUsage','CMU','AssignMem','unmapped_cache_usage','page_cache_usage', 'max_mem_usage','mean_diskIO_time','mean_local_disk_space','max_cpu_usage', 'max_disk_io_time', 'cpi', 'mai','sampled_cpu_usage']
-df = read_csv('/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
+df = read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/plotTimeSeries/results/data_resource_JobId_6336594489.csv', header=None, index_col=False, names=colnames)
 time_stamp=[]
 numberOfTaskIndex = df['numberOfTaskIndex'].values
 
@@ -128,8 +128,8 @@ for j in range(len(newDf)):
 	# print AssignMem
 	ax0 = plt.subplot2grid((1,1),(0,0))
 	ax0.scatter(time_stamp,newDf[j])
-	ax0.set(title="Visualization", xlabel=colnames[0], ylabel=colnames[j])
-	plt.savefig('results/%s.png'%(colnames[j]))
+	ax0.set(title="Visualization", xlabel=colnames[0], ylabel=colnames[j+1])
+	plt.savefig('results/%s.png'%(colnames[j+1]))
 	pp.close()
 
 
