@@ -36,7 +36,7 @@ cpi = []
 mai = []
 sampled_cpu_usage=[]
 time_stamp.append(df['time_stamp'])
-for i in range(47505):
+for i in range(8640):
 	
 	meanCPUUsage.append(round(df['meanCPUUsage'].values[i],2))
 	CMU.append(round(df['CMU'].values[i],2))
