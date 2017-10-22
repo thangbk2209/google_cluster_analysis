@@ -54,7 +54,7 @@ timeNow = timeStart
 timeEnd = TimeData[len(TimeData)-1][1]
 numberOfPart = 0 # Dem so luong part khong rong da doc qua
 # partNumber = 0  # vi tri part
-extraTime = 10
+extraTime = 300
 # for file_name in os.listdir(folder_path):  
 for partNumber in range(0,500):
     # f = open("TimeJobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv")
@@ -90,13 +90,13 @@ for partNumber in range(0,500):
                         break
                     elif timeStamp < timeCheck:
                         resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
+                        resourceData.toPandas().to_csv('thangbk2209/fiveMinutesTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
                     elif timeStamp >= timeCheck and timeStamp < timeEndPart:
                         resourceData1 = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData1.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
+                        resourceData1.toPandas().to_csv('thangbk2209/fiveMinutesTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
 
                         resourceData2 = sql_context.sql("SELECT * from nextDataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData2.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber+1,timeStamp), index=False, header=None)
+                        resourceData2.toPandas().to_csv('thangbk2209/fiveMinutesTopJobId/%s-%s.csv'%(partNumber+1,timeStamp), index=False, header=None)
             else:
                 for timeStamp in range(timeNow,timeEnd, extraTime):
                     if timeStamp >= timeEndPart:
@@ -104,11 +104,11 @@ for partNumber in range(0,500):
                         break
                     else:
                         resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
+                        resourceData.toPandas().to_csv('thangbk2209/fiveMinutesTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
 
         else:
             for timeStamp in range(timeNow,timeEnd, extraTime):
                 resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                resourceData.toPandas().to_csv('thangbk2209/tenSecondsTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
+                resourceData.toPandas().to_csv('thangbk2209/fiveMinutesTopJobId/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
           
 sc.stop()
