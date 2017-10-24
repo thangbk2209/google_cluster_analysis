@@ -37,7 +37,7 @@ dataSchema = StructType([
                          StructField('sampled_cpu_usage', FloatType(), True),
                          StructField('time_stamp', FloatType(), True)])
 
-file_name = "extractedData.csv"
+file_name = "extractedData5minutes.csv"
 df = (
     sql_context.read
     .format('com.databricks.spark.csv')
