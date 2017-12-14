@@ -1,5 +1,4 @@
-# Truy xuat cac du lieu ve resource usage cua job id = 6336594489(Job id co so luong task lon nhat) 
-# tu cac part trong du lieu google cluster trace
+# tinh resoure usage cua tung timeStamp - cong lai tong resouce usage trong tung file - moi file chua mot diem thoi gian
 from pyspark.sql.session import SparkSession as spark
 import pandas as pd
 from pyspark import SparkContext
@@ -11,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/fiveMinutesTopJobId/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
@@ -37,6 +36,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('agg_type', FloatType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
 
+
 for file_name in os.listdir(folder_path):
     df = (
         sql_context.read
@@ -44,10 +44,10 @@ for file_name in os.listdir(folder_path):
         .schema(dataSchema)
         .load("%s%s"%(folder_path,file_name))
     )
+    
     df.createOrReplaceTempView("dataFrame")
-    # df.printSchema()
-    resourceUsage = sql_context.sql("SELECT startTime/1000000 as st, endTime/1000000, JobId, taskIndex, machineId, meanCPUUsage,CMU,AssignMem,unmapped_cache_usage,page_cache_usage, max_mem_usage,mean_diskIO_time,mean_local_disk_space,max_cpu_usage,max_disk_io_time, cpi, mai, sampling_portion, agg_type, sampled_cpu_usage from dataFrame where JobId = 617685 order by st ASC")
-    # schema_df = ["startTime","numberOfJob"]
-    resourceUsage.toPandas().to_csv('thangbk2209/ID-617685/%s'%(file_name), index=False, header=None)
-    # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
+   
+    reSourceDf = sql_context.sql("SELECT JobId,count(taskIndex),count(machineId),avg(meanCPUUsage),avg(CMU),avg(AssignMem),avg(unmapped_cache_usage),avg(page_cache_usage), avg(max_mem_usage),avg(mean_diskIO_time),avg(mean_local_disk_space),avg(max_cpu_usage), avg(max_disk_io_time), avg(cpi), avg(mai),avg(sampling_portion),avg(agg_type),avg(sampled_cpu_usage) from dataFrame group by JobId")
+    
+    reSourceDf.toPandas().to_csv('thangbk2209/averageResourceTopJopId5minutes/%s'%(file_name), index=False, header=None)
 sc.stop()

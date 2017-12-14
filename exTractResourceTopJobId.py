@@ -59,7 +59,7 @@ extraTime = 300
 for partNumber in range(0,500):
     # f = open("TimeJobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv")
     
-    file_name = "JobMaxTaskpart-00"+str(partNumber).zfill(3)+"-of-00500.csv"
+    file_name = "part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
     if os.stat("%s%s"%(folder_path,file_name)).st_size != 0: 
         timeStartPart = TimeData[numberOfPart][0]
         timeEndPart = TimeData[numberOfPart][1]
@@ -72,7 +72,7 @@ for partNumber in range(0,500):
         df.createOrReplaceTempView("dataFrame")
         numberOfPart +=1
         if numberOfPart != len(TimeData):
-            next_file_name = "JobMaxTaskpart-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
+            next_file_name = "part-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
             timeCheck = TimeData[numberOfPart][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
                                         # voi thoi diem ket thuc part hien tai co bi chong lan khong
             if timeCheck <= timeEndPart:
