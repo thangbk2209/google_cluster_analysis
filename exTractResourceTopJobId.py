@@ -14,7 +14,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/TopJobId/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resoure_6176858948/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
@@ -41,7 +41,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
 
 schema_Timedf = ["startTime","endTime"]    
-TimeValues = pd.read_csv('thangbk2209/plotTimeSeries/results/minMaxTimePart.csv',names=schema_Timedf).values
+TimeValues = pd.read_csv('thangbk2209/plotTimeSeries/results/minMaxTimePart_resoure_6176858948.csv',names=schema_Timedf).values
 TimeData = []
 for i in range(len(TimeValues)):
     a=[]
