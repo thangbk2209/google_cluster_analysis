@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from pandas import read_csv
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/tenMinutes_6176858948/'
+folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/resource_tenMinutes_6176858948/'
 
 timeSeriesData=[]
 for file_name in os.listdir(folder_path):
