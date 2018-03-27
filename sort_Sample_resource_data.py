@@ -15,8 +15,8 @@ folder_path = '/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/google_c
 
 dataSchema = StructType([
                          StructField('JobId', LongType(), True),
-                         StructField('numberOfTaskIndex', FloatType(), True),
-                         StructField('numberOfMachineId', FloatType(), True),
+                         StructField('taskIndex', FloatType(), True),
+                         StructField('machineId', FloatType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
                          # canonical memory usage
                          StructField('CMU', FloatType(), True),
