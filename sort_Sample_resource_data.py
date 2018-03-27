@@ -11,14 +11,12 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/home/nguyen/spark-lab/spark-2.1.1-bin-hadoop2.7/google_cluster_analysis/results/'
-folder_path = '/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/google_cluster_analysis/results/'
+folder_path = '/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/google_cluster_analysis/results/'
 
 dataSchema = StructType([
-                         StructField('startTime', LongType(), True),
-                         StructField('endTime', LongType(), True),
                          StructField('JobId', LongType(), True),
-                         StructField('taskIndex', FloatType(), True),
-                         StructField('machineId', FloatType(), True),
+                         StructField('numberOfTaskIndex', FloatType(), True),
+                         StructField('numberOfMachineId', FloatType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
                          # canonical memory usage
                          StructField('CMU', FloatType(), True),
