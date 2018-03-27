@@ -10,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/home/hunter/GoogleCluster/task_usage_extract'
+folder_path = '/home/hunter/GoogleCluster/task_usage_extract/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),

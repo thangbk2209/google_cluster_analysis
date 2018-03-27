@@ -5,3 +5,12 @@ B3: Chạy sudo ./bin/spark-submit thangbk2209/google_cluster_analysis/sumResour
 B4: Chạy sudo python thangbk2209/google_cluster_analysis/AddColumns.py
 B5: Chạy sudo python thangbk2209/google_cluster_analysis/excuteNaN.py
 B6: Chạy sudo python thangbk2209/google_cluster_analysis/sort_Sample_resource_data.py
+Lệnh:
+./bin/spark-submit thangbk2209/google_cluster_analysis/JobMaxTask.py --conf spark.driver.cores==16 spark.executor.memory == 16 
+&& ./bin/spark-submit thangbk2209/google_cluster_analysis/minStart_maxEndPerJob.py --conf spark.driver.cores==16 spark.executor.memory == 16 
+&& python thangbk2209/google_cluster_analysis/concat.py 
+&& ./bin/spark-submit thangbk2209/google_cluster_analysis/exTractResourceTopJobId.py --conf spark.driver.cores==16 spark.executor.memory == 16
+&& ./bin/spark-submit thangbk2209/google_cluster_analysis/sumResource.py --conf spark.driver.cores==16 spark.executor.memory == 16 
+&& python thangbk2209/google_cluster_analysis/AddColumns.py 
+&& python thangbk2209/google_cluster_analysis/excuteNaN.py 
+&& ./bin/spark-submit thangbk2209/google_cluster_analysis/sort_Sample_resource_data.py
