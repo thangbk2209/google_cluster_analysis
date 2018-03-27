@@ -1,4 +1,4 @@
-B1: Tạo hai thư mục thangbk2209/twoMinutes_6176858948 và thangbk2209/resource_twoMinutes_6176858948
+B1: Tạo hai thư mục thangbk2209/fiveMinutes_6176858948 và thangbk2209/resource_fiveMinutes_6176858948
 B2. ra ngoài thư mục spark2.7...(Thư mục cha của thangbk2209)
  chạy lệnh sudo ./bin/spark-submit thangbk2209/google_cluster_analysis/exTractResourceTopJobId.py
 B3: Chạy sudo ./bin/spark-submit thangbk2209/google_cluster_analysis/sumResource.py
