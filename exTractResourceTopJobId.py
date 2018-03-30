@@ -54,7 +54,7 @@ timeNow = timeStart
 timeEnd = TimeData[len(TimeData)-1][1]
 numberOfPart = 0 # Dem so luong part khong rong da doc qua
 # partNumber = 0  # vi tri part
-extraTime = 120
+extraTime = 300
 # for file_name in os.listdir(folder_path):  
 for partNumber in range(0,500):
     # f = open("TimeJobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv")
