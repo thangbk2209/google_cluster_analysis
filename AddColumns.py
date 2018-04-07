@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from pandas import read_csv
-folder_path = 'thangbk2209/resource_fiveMinutes_6176858948/'
+folder_path = 'thangbk2209/resource_tenMinutes_6176858948/'
 
 timeSeriesData=[]
 for file_name in os.listdir(folder_path):
@@ -29,4 +29,4 @@ for file_name in os.listdir(folder_path):
 		
 newDf = pd.DataFrame(timeSeriesData)
 # df1 = newDf.replace(np.nan, 0, regex=True)
-newDf.to_csv('thangbk2209/google_cluster_analysis/results/resource_usage_fiveMinutes_6176858948.csv', index=False, header=None)
+newDf.to_csv('thangbk2209/google_cluster_analysis/results/resource_usage_tenMinutes_6176858948.csv', index=False, header=None)
