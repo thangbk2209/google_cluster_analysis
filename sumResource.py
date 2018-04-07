@@ -10,7 +10,7 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = 'thangbk2209/fiveMinutes_6176858948/'
+folder_path = 'thangbk2209/tenMinutes_6176858948/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
@@ -49,5 +49,5 @@ for file_name in os.listdir(folder_path):
    
     reSourceDf = sql_context.sql("SELECT JobId,count(taskIndex),count(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by JobId")
     
-    reSourceDf.toPandas().to_csv('thangbk2209/resource_fiveMinutes_6176858948/%s'%(file_name), index=False, header=None)
+    reSourceDf.toPandas().to_csv('thangbk2209/resource_tenMinutes_6176858948/%s'%(file_name), index=False, header=None)
 sc.stop()
