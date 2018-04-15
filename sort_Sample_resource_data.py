@@ -37,17 +37,23 @@ dataSchema = StructType([
                          StructField('sampled_cpu_usage', FloatType(), True),
                          StructField('time_stamp', FloatType(), True)])
 
-file_name = "tenMinutes_6176858948_notNan.csv"
-df = (
-    sql_context.read
-    .format('com.databricks.spark.csv')
-    .schema(dataSchema)
-    .load("%s%s"%(folder_path,file_name))
-)
-df.createOrReplaceTempView("dataFrame")
 
-DataDf = sql_context.sql("SELECT time_stamp,sum(taskIndex),sum(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by time_stamp order by time_stamp ASC")
-print "DataDf.count()= "
-print DataDf.count()
-DataDf.toPandas().to_csv('thangbk2209/google_cluster_analysis/results/data_resource_usage_tenMinutes_6176858948.csv', index=False, header=None)
-sc.stop()
+file_names = ['3Minutes_6176858948_notNan.csv','7Minutes_6176858948_notNan.csv','10Minutes_6176858948_notNan.csv']
+file_results = ['data_resource_usage_3Minutes_6176858948.csv','data_resource_usage_7Minutes_6176858948.csv','data_resource_usage_10Minutes_6176858948.csv']
+for i in range(3):
+    file_name = file_names[i]
+    file_result = file_results[i]
+
+    df = (
+        sql_context.read
+        .format('com.databricks.spark.csv')
+        .schema(dataSchema)
+        .load("%s%s"%(folder_path,file_name))
+    )
+    df.createOrReplaceTempView("dataFrame")
+
+    DataDf = sql_context.sql("SELECT time_stamp,sum(taskIndex),sum(machineId),sum(meanCPUUsage),sum(CMU),sum(AssignMem),sum(unmapped_cache_usage),sum(page_cache_usage), sum(max_mem_usage),sum(mean_diskIO_time),sum(mean_local_disk_space),sum(max_cpu_usage), sum(max_disk_io_time), sum(cpi), sum(mai),sum(sampling_portion),sum(agg_type),sum(sampled_cpu_usage) from dataFrame group by time_stamp order by time_stamp ASC")
+    print "DataDf.count()= "
+    print DataDf.count()
+    DataDf.toPandas().to_csv('thangbk2209/google_cluster_analysis/results/%s'%(file_result), index=False, header=None)
+    sc.stop()

@@ -54,61 +54,65 @@ timeNow = timeStart
 timeEnd = TimeData[len(TimeData)-1][1]
 numberOfPart = 0 # Dem so luong part khong rong da doc qua
 # partNumber = 0  # vi tri part
-extraTime = 600
+extraTimes = [180,420,600]
+folderNames = ['3minutes_6176858948','7minutes_6176858948','10minutes_6176858948']
 # for file_name in os.listdir(folder_path):  
-for partNumber in range(0,500):
-    # f = open("TimeJobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv")
-    
-    file_name = "part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
-    if os.stat("%s%s"%(folder_path,file_name)).st_size != 0: 
-        timeStartPart = TimeData[numberOfPart][0]
-        timeEndPart = TimeData[numberOfPart][1]
-        df = (
-            sql_context.read
-            .format('com.databricks.spark.csv')
-            .schema(dataSchema)
-            .load("%s%s"%(folder_path,file_name))
-        )
-        df.createOrReplaceTempView("dataFrame")
-        numberOfPart +=1
-        if numberOfPart != len(TimeData):
-            next_file_name = "part-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
-            timeCheck = TimeData[numberOfPart][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
-                                        # voi thoi diem ket thuc part hien tai co bi chong lan khong
-            if timeCheck <= timeEndPart:
-                nextDf = (
-                    sql_context.read
-                    .format('com.databricks.spark.csv')
-                    .schema(dataSchema)
-                    .load("%s%s"%(folder_path,file_name))
-                )
-                nextDf.createOrReplaceTempView("nextDataFrame")
+for i in range(3):
+    extraTime = extraTimes[i]
+    folderName = folderNames[i]
+    for partNumber in range(0,500):
+        # f = open("TimeJobMaxTaskpart-00"+str(num).zfill(3)+"-of-00500.csv")
+        
+        file_name = "part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
+        if os.stat("%s%s"%(folder_path,file_name)).st_size != 0: 
+            timeStartPart = TimeData[numberOfPart][0]
+            timeEndPart = TimeData[numberOfPart][1]
+            df = (
+                sql_context.read
+                .format('com.databricks.spark.csv')
+                .schema(dataSchema)
+                .load("%s%s"%(folder_path,file_name))
+            )
+            df.createOrReplaceTempView("dataFrame")
+            numberOfPart +=1
+            if numberOfPart != len(TimeData):
+                next_file_name = "part-00"+str(partNumber+1).zfill(3)+"-of-00500.csv"
+                timeCheck = TimeData[numberOfPart][0]  # Kiem tra xem phan thoi gian bat dau cua part tiep theo
+                                            # voi thoi diem ket thuc part hien tai co bi chong lan khong
+                if timeCheck <= timeEndPart:
+                    nextDf = (
+                        sql_context.read
+                        .format('com.databricks.spark.csv')
+                        .schema(dataSchema)
+                        .load("%s%s"%(folder_path,file_name))
+                    )
+                    nextDf.createOrReplaceTempView("nextDataFrame")
 
-                for timeStamp in range(timeNow,timeEnd, extraTime):
-                    if timeStamp >= timeEndPart:
-                        timeNow = timeStamp
-                        break
-                    elif timeStamp < timeCheck:
-                        resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData.toPandas().to_csv('thangbk2209/tenMinutes_6176858948/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
-                    elif timeStamp >= timeCheck and timeStamp < timeEndPart:
-                        resourceData1 = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData1.toPandas().to_csv('thangbk2209/tenMinutes_6176858948/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
+                    for timeStamp in range(timeNow,timeEnd, extraTime):
+                        if timeStamp >= timeEndPart:
+                            timeNow = timeStamp
+                            break
+                        elif timeStamp < timeCheck:
+                            resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
+                            resourceData.toPandas().to_csv('thangbk2209/%s/%s-%s.csv'%(folderName,partNumber,timeStamp), index=False, header=None)
+                        elif timeStamp >= timeCheck and timeStamp < timeEndPart:
+                            resourceData1 = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
+                            resourceData1.toPandas().to_csv('thangbk2209/%s/%s-%s.csv'%(folderName,partNumber,timeStamp), index=False, header=None)
 
-                        resourceData2 = sql_context.sql("SELECT * from nextDataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData2.toPandas().to_csv('thangbk2209/tenMinutes_6176858948/%s-%s.csv'%(partNumber+1,timeStamp), index=False, header=None)
+                            resourceData2 = sql_context.sql("SELECT * from nextDataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
+                            resourceData2.toPandas().to_csv('thangbk2209/%s/%s-%s.csv'%(folderName,partNumber+1,timeStamp), index=False, header=None)
+                else:
+                    for timeStamp in range(timeNow,timeEnd, extraTime):
+                        if timeStamp >= timeEndPart:
+                            timeNow = timeStamp
+                            break
+                        else:
+                            resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
+                            resourceData.toPandas().to_csv('thangbk2209/%s/%s-%s.csv'%(folderName,partNumber,timeStamp), index=False, header=None)
+
             else:
                 for timeStamp in range(timeNow,timeEnd, extraTime):
-                    if timeStamp >= timeEndPart:
-                        timeNow = timeStamp
-                        break
-                    else:
-                        resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                        resourceData.toPandas().to_csv('thangbk2209/tenMinutes_6176858948/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
-
-        else:
-            for timeStamp in range(timeNow,timeEnd, extraTime):
-                resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
-                resourceData.toPandas().to_csv('thangbk2209/tenMinutes_6176858948/%s-%s.csv'%(partNumber,timeStamp), index=False, header=None)
-          
-sc.stop()
+                    resourceData = sql_context.sql("SELECT * from dataFrame where startTime <= %s and endTime > %s"%(timeStamp,timeStamp) )
+                    resourceData.toPandas().to_csv('thangbk2209/%s/%s-%s.csv'%(folderName,partNumber,timeStamp), index=False, header=None)
+            
+    sc.stop()
