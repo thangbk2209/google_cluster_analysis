@@ -54,10 +54,10 @@ timeNow = timeStart
 timeEnd = TimeData[len(TimeData)-1][1]
 numberOfPart = 0 # Dem so luong part khong rong da doc qua
 # partNumber = 0  # vi tri part
-extraTimes = [180,420,600]
-folderNames = ['3minutes_6176858948','7minutes_6176858948','10minutes_6176858948']
+extraTimes = [180]
+folderNames = ['3minutes_6176858948']
 # for file_name in os.listdir(folder_path):  
-for i in range(3):
+for i in range(1):
     extraTime = extraTimes[i]
     folderName = folderNames[i]
     for partNumber in range(0,500):
