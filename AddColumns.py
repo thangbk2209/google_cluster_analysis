@@ -5,7 +5,7 @@ import os
 from pandas import read_csv
 folder_paths = ['thangbk2209/resource_8Minutes_6176858948/']
 file_results = ['resource_usage_8Minutes_6176858948.csv']
-for i in range(3):
+for i in range(1):
 	folder_path = folder_paths[i]
 	file_result = file_results[i]
 	timeSeriesData=[]
