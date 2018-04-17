@@ -10,8 +10,8 @@ sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_paths = ['thangbk2209/3minutes_6176858948/']
-folder_results = ['resource_3Minutes_6176858948']
+folder_paths = ['thangbk2209/8minutes_6176858948/']
+folder_results = ['resource_8Minutes_6176858948']
 for i in range(1):
     folder_path = folder_paths[i]
     folder_result = folder_results[i]

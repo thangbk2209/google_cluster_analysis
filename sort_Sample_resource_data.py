@@ -38,8 +38,8 @@ dataSchema = StructType([
                          StructField('time_stamp', FloatType(), True)])
 
 
-file_names = ['3Minutes_6176858948_notNan.csv']
-file_results = ['data_resource_usage_3Minutes_6176858948.csv']
+file_names = ['8Minutes_6176858948_notNan.csv']
+file_results = ['data_resource_usage_8Minutes_6176858948.csv']
 for i in range(3):
     file_name = file_names[i]
     file_result = file_results[i]
