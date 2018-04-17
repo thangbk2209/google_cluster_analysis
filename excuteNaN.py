@@ -5,7 +5,7 @@ from pandas import read_csv
 
 file_names = ['resource_usage_3Minutes_6176858948.csv']
 file_results = ['3Minutes_6176858948_notNan.csv']
-for i in range(3):
+for i in range(1):
     file_name = file_names[i]
     file_result = file_results[i]
     df = read_csv('thangbk2209/google_cluster_analysis/results/%s'%(file_name), header=None,index_col=False)
