@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import os
 from pandas import read_csv
-folder_paths = ['thangbk2209/resource_8Minutes_6176858948/']
-file_results = ['resource_usage_8Minutes_6176858948.csv']
+folder_paths = ['thangbk2209/resource_10Minutes_6176858948/']
+file_results = ['resource_usage_10Minutes_6176858948.csv']
 for i in range(1):
 	folder_path = folder_paths[i]
 	file_result = file_results[i]
