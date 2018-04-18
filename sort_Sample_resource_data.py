@@ -40,7 +40,7 @@ dataSchema = StructType([
 
 file_names = ['10Minutes_6176858948_notNan.csv']
 file_results = ['data_resource_usage_10Minutes_6176858948.csv']
-for i in range(3):
+for i in range(1):
     file_name = file_names[i]
     file_result = file_results[i]
 
